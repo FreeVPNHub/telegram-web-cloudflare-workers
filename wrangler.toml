@@ -1,0 +1,23 @@
+# Canonical Wrangler config for one-click deploy, local development, tests, and CI.
+# Install with `npm --prefix app ci`; deploy with `npm --prefix app run deploy`.
+name = "telegram-web-cloudflare-workers"
+main = "app/src/index.js"
+compatibility_date = "2026-08-25"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# RELAY_DEBUG = "0"
+
+[observability]
+enabled = true
+
+[observability.logs]
+invocation_logs = false
+
+[[durable_objects.bindings]]
+name = "RELAY"
+class_name = "RelayDO"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["RelayDO"]
